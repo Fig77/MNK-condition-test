@@ -11,5 +11,4 @@ class Grid
 		@grid.each_with_index { |x, i| ( ( i + 1 ) % 3 )  == 0 ? ( puts x ) : ( print x ) }
 	end
 
-	end
 end
