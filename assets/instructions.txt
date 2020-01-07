@@ -1,0 +1,4 @@
+Player one, please type your name and then press enter.\n After doing so, please Player two do the same.
+#INSTRUCTIONS\n
+* This is a game of tic-tac-toe. Press the numbers you'll see on the board, to place your move.\n
+* Player who gets 3 consecutives moves, on a row, column, diagonal or anti-diagonal, will win.
