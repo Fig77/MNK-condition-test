@@ -1,13 +1,16 @@
+require_relative 'logic'
+require_relative 'board'
+
 class Game 	# Due to the simplicity of the project all the game will be managed from this class
 	def initialize(player_one = "Player one", player_two = "Player two")
 		@players = [player_one, "| X | ", player_two, "| O | "]
 		@turn = 1
 		@turn_changer = 2
-		@board = Board.new
+		@board = Grid.new
 		@game_state = 3
 		@game_strings = []
 		@logicAuxiliar = Logic.new
-		File.foreach("../assets/instructions.txt") { |x| game_strings.push(x) }
+		File.foreach("../assets/instructions.txt") { |x| @game_strings.push(x) }
 	end
 
 	def main_loop
