@@ -13,38 +13,55 @@ class Game 	# Due to the simplicity of the project all the game will be managed 
 		File.foreach("../assets/instructions.txt") { |x| @game_strings.push(x) }
 	end
 
-	def main_loop
+	def run
+		input = 3
 		while @game_state == 3
-		  print "Welcome ${@player_one} and ${@player_two}"
-		  puts "1. Start Game\n 2. Change names\n 3. Instructions\n 4. Exit"
+		  puts "Welcome #{@players[0]} and #{@players[2]}\n 1. Start Game\n 2. Change names\n 3. Instructions\n 4. Exit"
 		  input = gets.chomp
-		  case input
+		  case input.to_i
 		    when 1
 		    	@board.draw
 		    	@game_state = 2
+		    	game_loop
 		    when 2
 		    	puts @game_strings[0]
-		    	@player_one = gets.chomp
-		    	@player_two = gets.chomp
+		    	@players[0] = gets.chomp
+		    	@players[2] = gets.chomp
 		    when 3
-		    	puts @game_strings[1]
+		      @game_strings.each_with_index {|value, ind| puts value unless ind == 0}
 		    when 4
 		    	@game_state = -1
 		    else
+		    	puts "test"
 		  end
     end
+  end
 
+  def game_loop
 		while @game_state == 2
-			puts "${@players[@turn-1] its your turn}"
-			loop do
-			  input = gets.chomp
-			  break if input.between?(1, 9)
-			end
-		  @board.grid[input.to_i - 1] = players[turn]
-  		@game_state = @logicAuxiliar.gameCondition(input.to_i, (-1*turn + 2) )
-  		puts "GANASTE!" if  game_state == -1 || game_state == 1
-  		@turn += @turn_changer
-  		@turn_changer = @turn_changer * -1
-		 end
+			puts "#{@players[@turn-1]} its your turn"
+			input = gets.chomp
+
+			@game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
+			
+			case @game_state
+			  when 4
+				  puts "That position is taken, or input not between 1 - 9"
+				  @game_state = 2
+				when 1, 2
+					@board.grid[input.to_i - 1] = @players[@turn]
+		      @board.draw
+		      @turn += @turn_changer
+		      @turn_changer = @turn_changer * -1
+		    else
+		   end
+		end
+		if @game_state == 1
+			puts "\n #{@players[@turn-3]} has won!" 
+		elsif @game_state == 0
+			puts "It's a tie!"
+		end
+		@game_state = 3
+		run
 	end
 end
