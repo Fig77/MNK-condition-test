@@ -11,4 +11,10 @@ class Grid
 		@grid.each_with_index { |x, i| ( ( i + 1 ) % 3 )  == 0 ? ( puts x ) : ( print x ) }
 	end
 
+	def clear
+		@grid = ["| 1 | ","| 2 | ","| 3 | ",
+						 "| 4 | ","| 5 | ","| 6 | ",
+						 "| 7 | ","| 8 | ","| 9 |" ]
+	end
+
 end

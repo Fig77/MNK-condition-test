@@ -60,4 +60,9 @@ class Logic
   		3
   	end
 	end
+
+  def clear
+  	@move_count = 0
+  	@logic_grid = [0, 0, 0, 0, 0, 0, 0, 0]
+  end
 end
