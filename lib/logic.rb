@@ -1,26 +1,21 @@
 class Logic
 	def initialize
-		@logic_grid = [0, 0, 0, 0, 0, 0, 0, 0] # Vector represnt victory conditions. row1-row2-row3-col1-col2-col3-diag1-diag2
+		@logic_grid = [0, 0, 0, 0, 0, 0, 0, 0] # Vector represnt victory conditions. row1-row2-row3-col2-col1-col3-diag1-diag2
 		@row = 0 # Represents row of current input.
 		@column = 0 # Represents column of current input.
 		@move_count = 0 # Cheks if it's a tie.
 	end
 
 	def getColumnRow(input)
-		if input % 3 == 0
-		  @row = (input / 3 ) - 1
-		  @column = ((input % 3) + 2) + 3
-		else
-			@row = (input / 3 )
-			@column = ((input % 3) + 2)
-		end
+		@column = ( (input - 1) % 3) + 3 #Should return col1 - col2 - col3
+		@row = ( (input - 1) / 3) #Should return the true value of it's position in the logic grid.
 	end
 
 	def checkDiagonal(t)
-		if @row == @column-3
+		if @row == @column - 3
 			@logic_grid[6] += t
 		end
-		if ((@row - (@column - 3)).abs == 2 || @row == 1 )
+		if ((@row - (@column - 3)).abs == 2 || @row + @column == 5 )
 			@logic_grid[7] += t
 		end
 	  return 1 if @logic_grid[6].abs == 3
@@ -60,4 +55,9 @@ class Logic
   		3
   	end
 	end
+
+  def clear
+  	@move_count = 0
+  	@logic_grid = [0, 0, 0, 0, 0, 0, 0, 0]
+  end
 end
