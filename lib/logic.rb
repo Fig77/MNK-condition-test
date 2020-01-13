@@ -7,8 +7,8 @@ class Logic
 	end
 
 	def getColumnRow(input)
-		@column = ( (input - 1) % 3) + 3 #Should return col1 - col2 - col3
-		@row = ( (input - 1) / 3) #Should return the true value of it's position in the logic grid.
+		@column = ( (input - 1) % 3) + 3
+		@row = ( (input - 1) / 3)
 	end
 
 	def checkDiagonal(t)
