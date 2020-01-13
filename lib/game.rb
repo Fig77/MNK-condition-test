@@ -43,7 +43,11 @@ class Game 	# Due to the simplicity of the project all the game will be managed 
   end
 
   def startGame
+  	@board.clear
   	@board.draw
+  	@logicAuxiliar.clear
+  	@turn = 1
+  	@turn_changer = 2
 		@game_state = 2
 		game_loop
   end
@@ -54,7 +58,7 @@ class Game 	# Due to the simplicity of the project all the game will be managed 
 			input = gets.chomp
 
 			@game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
-			
+
 			case @game_state
 			  when 4
 				  puts "That position is taken, or input not between 1 - 9"
@@ -68,13 +72,15 @@ class Game 	# Due to the simplicity of the project all the game will be managed 
 		   end
 		end
 		if @game_state == 1
-			puts "\n #{@players[@turn-3]} has won!"
+			@turn += @turn_changer
+			puts "\n #{@players[@turn - 1]} has won!"
 			@board.clear
-			@board.clear
+			@players[4] = false
 			run
 		elsif @game_state == 0
 			puts "It's a tie!"
 			@board.clear
+			@players[4] = false
 			@logicAuxiliar.clear
 			run
 		end
