@@ -18,6 +18,11 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       puts "\nWelcome #{@players[0]} and #{@players[2]} \n"
       @game_strings[4...9].each do |x| puts x end
       input = gets.chomp
+      if input.length != 1
+        File.foreach("../assets/SHALLYOU.txt") { |x| puts x }
+        puts " YOU SHALL NOT PASS!" 
+        exit
+      end
       case input.to_i
         when 1
           @players[4] = false
