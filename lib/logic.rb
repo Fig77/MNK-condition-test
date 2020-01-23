@@ -18,8 +18,8 @@ class Logic
 		if ((@row - (@column - 3)).abs == 2 || @row + @column == 5 )
 			@logic_grid[7] += t
 		end
-	  return 1 if @logic_grid[6].abs == 3
-	  return 1 if @logic_grid[7].abs == 3
+	  return 3 if @logic_grid[6].abs == 3
+	  return 3 if @logic_grid[7].abs == 3
 
 	  2
 	end
@@ -28,19 +28,20 @@ class Logic
 
 		@logic_grid[@row] += t
 		@logic_grid[@column] += t
-		return 1 if @logic_grid[@row].abs == 3 || @logic_grid[@column].abs == 3
+		return 3 if @logic_grid[@row].abs == 3 || @logic_grid[@column].abs == 3
 		2
 	end
 
 	def gameCondition(input, t) # t will add or substract from @logical_grid depending on player.
-		return 0 if @move_count == 8
-		@move_count += 1
+		
 		getColumnRow(input)
 		diagonalCheck = checkDiagonal(t)
+		@move_count += 1
 		return diagonalCheck unless diagonalCheck == 2
-
 		verticalHorizontal = checkVerticalHorizontal(t)
 		return verticalHorizontal unless verticalHorizontal == 2
+		
+		return 0 if @move_count == 9
 		2
 	end
 
@@ -52,7 +53,7 @@ class Logic
   	  return gameCondition(input.to_i, (-1*turn + 2) )
 
   	else
-  		3
+  		5
   	end
 	end
 
