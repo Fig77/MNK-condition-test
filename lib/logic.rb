@@ -1,5 +1,5 @@
 class Logic
-	def initialize
+	def initialize(k = 3)
 		@logic_grid = [0, 0, 0, 0, 0, 0, 0, 0] # Vector represnt victory conditions. row1-row2-row3-col2-col1-col3-diag1-diag2
 		@row = 0 # Represents row of current input.
 		@column = 0 # Represents column of current input.
@@ -18,8 +18,8 @@ class Logic
 		if ((@row - (@column - 3)).abs == 2 || @row + @column == 5 )
 			@logic_grid[7] += t
 		end
-	  return 3 if @logic_grid[6].abs == 3
-	  return 3 if @logic_grid[7].abs == 3
+	  return 3 if @logic_grid[6].abs == 10
+	  return 3 if @logic_grid[7].abs == 10
 
 	  2
 	end
@@ -28,7 +28,7 @@ class Logic
 
 		@logic_grid[@row] += t
 		@logic_grid[@column] += t
-		return 3 if @logic_grid[@row].abs == 3 || @logic_grid[@column].abs == 3
+		return 3 if @logic_grid[@row].abs == 10 || @logic_grid[@column].abs == 10
 		2
 	end
 
