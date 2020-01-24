@@ -10,7 +10,15 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       @board = Grid.new
       @logicAuxiliar = Logic.new
       @game_strings = []
+      @check_message = []
+      File.foreach("../assets/SHALLYOU.txt") { |x| @check_message.push(x) unless x[0] == "!" }
       File.foreach("../assets/instructions.txt") { |x| @game_strings.push(x) unless x[0] == "!" }
+  end
+
+  def shallYou
+    puts " YOU SHALL NOT PASS!" 
+    @check_message.each do |x| puts x end
+    exit
   end
 
   def run
@@ -18,11 +26,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       puts "\nWelcome #{@players[0]} and #{@players[2]} \n"
       @game_strings[4...9].each do |x| puts x end
       input = gets.chomp
-      if input.length != 1
-        File.foreach("../assets/SHALLYOU.txt") { |x| puts x }
-        puts " YOU SHALL NOT PASS!" 
-        exit
-      end
+      shallYou if input.length != 1
       case input.to_i
         when 1
           @players[4] = false
@@ -60,7 +64,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
     while @game_state == 2
       puts "\n #{@players[@turn-1]} its your turn \n"
       input = gets.chomp
-
+      shallYou if input.length != 1
       @game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
 
       case @game_state
