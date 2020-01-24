@@ -67,14 +67,14 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       shallYou if input.length != 1
       @game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
       case @game_state
-        when 4
-          puts "That position is taken, or input not between 1 - 9"
-          @game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
         when 1, 2
           @board.grid[input.to_i - 1] = @players[@turn]
           @board.draw
           @turn += @turn_changer
           @turn_changer = @turn_changer * -1
+        when 4
+          puts "That position is taken, or input not between 1 - 9"
+          @game_state = 2
         else
        end
     end
