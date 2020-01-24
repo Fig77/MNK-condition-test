@@ -15,7 +15,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       File.foreach("../assets/instructions.txt") { |x| @game_strings.push(x) unless x[0] == "!" }
   end
 
-  def shallYou
+  def shallYou #should not be here 
     puts " YOU SHALL NOT PASS!" 
     @check_message.each do |x| puts x end
     exit
@@ -66,7 +66,6 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       input = gets.chomp
       shallYou if input.length != 1
       @game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
-
       case @game_state
         when 4
           puts "That position is taken, or input not between 1 - 9"
@@ -79,17 +78,14 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
         else
        end
     end
+
     @players[4] = true
     if @game_state == 3
       puts "\n #{@players[@turn - 1]} has won!"
-      @players[4] = false
       clear
-      run
     elsif @game_state == 0
       puts "It's a tie!"
-      @players[4] = false
       clear
-      run
     end
     @game_state = 3
     run
@@ -101,5 +97,6 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
     @logicAuxiliar.clear
     @turn = 1
     @turn_changer = 2
+    @players[4] = false
   end
 end
