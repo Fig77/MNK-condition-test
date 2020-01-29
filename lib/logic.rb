@@ -1,6 +1,7 @@
 class Logic
-	def initialize(k = 10)
-		@logic_grid = []
+  attr_writer :k, :board
+
+	def initialize(k = 3)
 		@row = 0 # Represents row of current input.
 		@column = 0 # Represents column of current input.
 		@move_count = 0 # Cheks if it's a tie.
@@ -9,6 +10,7 @@ class Logic
 	end
 
 	def defineLogicGrid
+		@logic_grid = []
 		((@k*@k) + 2).times { |x| @logic_grid.push(0) }
 	end
 
@@ -18,9 +20,6 @@ class Logic
 	end
 
 	def checkDiagonal(t)
-		puts "logi"
-		puts @logic_grid.size
-		puts @logic_grid[19]
 		if @row == @column - @k
 			@logic_grid[19] += t
 		end
