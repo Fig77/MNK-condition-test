@@ -1,10 +1,15 @@
 class Logic
 	def initialize(k = 10)
-		@logic_grid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] # Vector represnt victory conditions. row1-row2-row3-col2-col1-col3-diag1-diag2
+		@logic_grid = []
 		@row = 0 # Represents row of current input.
 		@column = 0 # Represents column of current input.
 		@move_count = 0 # Cheks if it's a tie.
 		@k = k
+		defineLogicGrid
+	end
+
+	def defineLogicGrid
+		((@k*@k) + 2).times { |x| @logic_grid.push(0) }
 	end
 
 	def getColumnRow(input)
@@ -50,12 +55,11 @@ class Logic
 	end
 
 	def manage_input(input, turn, taken)
-		if taken == "| X | " || taken == "| O | " || input.length > 2 || !input.to_i.between?(0, (@k*@k) - 1)
+		if taken == "| X | " || taken == "| O | " || input.length > 3 || !input.to_i.between?(0, (@k*@k))
 			return 4
     end
 		unless input.to_i == 0
   	  return gameCondition(input.to_i, (-1*turn + 2) )
-
   	else
   		5
   	end
@@ -63,6 +67,6 @@ class Logic
 
   def clear
   	@move_count = 0
-  	@logic_grid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  	defineLogicGrid
   end
 end
