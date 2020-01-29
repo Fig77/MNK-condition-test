@@ -45,7 +45,7 @@ class Logic
 		verticalHorizontal = checkVerticalHorizontal(t)
 		return verticalHorizontal unless verticalHorizontal == 2
 		
-		return 0 if @move_count == 9
+		return 0 if @move_count == @k * @k
 		2
 	end
 
