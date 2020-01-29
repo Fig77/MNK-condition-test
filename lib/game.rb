@@ -63,6 +63,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
   def game_loop
     while @game_state == 2
       puts "\n #{@players[@turn-1]} its your turn \n"
+      @board.draw
       input = gets.chomp
       shallYou if input.length != 1
       @game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
