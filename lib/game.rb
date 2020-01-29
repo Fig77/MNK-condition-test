@@ -26,7 +26,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       puts "\nWelcome #{@players[0]} and #{@players[2]} \n"
       @game_strings[4...9].each do |x| puts x end
       input = gets.chomp
-      shallYou if input.length != 1
+      shallYou if input.length > 2
       case input.to_i
         when 1
           @players[4] = false
@@ -65,7 +65,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       puts "\n #{@players[@turn-1]} its your turn \n"
       @board.draw
       input = gets.chomp
-      shallYou if input.length != 1
+      shallYou if input.length > 2
       @game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
       case @game_state
         when 1, 2
