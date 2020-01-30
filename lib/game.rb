@@ -4,10 +4,12 @@ require_relative 'board'
 class Game  # Due to the simplicity of the project all game scenes will be managed from this class
   def initialize(player_one = "Player one", player_two = "Player two")
       @players = [player_one, "| X | ", player_two, "| O | ", false]
+      @current_k = 3
       @turn = 1
       @turn_changer = 2
       @game_state = 3
       @board = Grid.new
+      puts "Default board size: 3. Go to options to change it."
       @logicAuxiliar = Logic.new
       @game_strings = []
       @check_message = []
@@ -26,7 +28,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       puts "\nWelcome #{@players[0]} and #{@players[2]} \n"
       @game_strings[4...9].each do |x| puts x end
       input = gets.chomp
-      shallYou if input.length != 1
+      shallYou if input.length > 3
       case input.to_i
         when 1
           @players[4] = false
@@ -42,6 +44,9 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
           puts @game_strings[0]
           @players[0] = gets.chomp
           @players[2] = gets.chomp
+          puts "Change board size"
+          aux = gets.chomp.to_i
+          @logicAuxiliar.k, @current_k = aux, aux 
         when 4
           puts ""
           @game_strings[1...4].each do |x| puts x end
@@ -65,7 +70,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       puts "\n #{@players[@turn-1]} its your turn \n"
       @board.draw
       input = gets.chomp
-      shallYou if input.length != 1
+      shallYou if input.length > 3
       @game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
       case @game_state
         when 1, 2
@@ -94,6 +99,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
 
   def clear
     @game_state = 3
+    @board.m, @board.n = @current_k, @current_k 
     @board.clear
     @logicAuxiliar.clear
     @turn = 1

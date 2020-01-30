@@ -1,25 +1,33 @@
 class Logic
+  attr_writer :k, :board
+
 	def initialize(k = 3)
-		@logic_grid = [0, 0, 0, 0, 0, 0, 0, 0] # Vector represnt victory conditions. row1-row2-row3-col2-col1-col3-diag1-diag2
 		@row = 0 # Represents row of current input.
 		@column = 0 # Represents column of current input.
 		@move_count = 0 # Cheks if it's a tie.
+		@k = k
+		defineLogicGrid
+	end
+
+	def defineLogicGrid
+		@logic_grid = []
+		((@k*@k) + 2).times { |x| @logic_grid.push(0) }
 	end
 
 	def getColumnRow(input)
-		@column = ( (input - 1) % 3) + 3
-		@row = ( (input - 1) / 3)
+		@column = ( (input - 1) % @k) + @k
+		@row = ( (input - 1) / @k)
 	end
 
 	def checkDiagonal(t)
-		if @row == @column - 3
-			@logic_grid[6] += t
+		if @row == @column - @k
+			@logic_grid[19] += t
 		end
-		if ((@row - (@column - 3)).abs == 2 || @row + @column == 5 )
-			@logic_grid[7] += t
+		if ((@row - (@column - @k)).abs == 2 || @row + @column == 5 )
+			@logic_grid[20] += t
 		end
-	  return 3 if @logic_grid[6].abs == 10
-	  return 3 if @logic_grid[7].abs == 10
+	  return 3 if @logic_grid[19].abs == @k
+	  return 3 if @logic_grid[20].abs == @k
 
 	  2
 	end
@@ -28,7 +36,7 @@ class Logic
 
 		@logic_grid[@row] += t
 		@logic_grid[@column] += t
-		return 3 if @logic_grid[@row].abs == 10 || @logic_grid[@column].abs == 10
+		return 3 if @logic_grid[@row].abs == @k || @logic_grid[@column].abs == @k
 		2
 	end
 
@@ -41,17 +49,16 @@ class Logic
 		verticalHorizontal = checkVerticalHorizontal(t)
 		return verticalHorizontal unless verticalHorizontal == 2
 		
-		return 0 if @move_count == 9
+		return 0 if @move_count == @k * @k
 		2
 	end
 
 	def manage_input(input, turn, taken)
-		if taken == "| X | " || taken == "| O | " || input.length != 1 || !input.to_i.between?(0,9)
+		if taken == "| X | " || taken == "| O | " || input.length > 3 || !input.to_i.between?(0, (@k*@k))
 			return 4
     end
 		unless input.to_i == 0
   	  return gameCondition(input.to_i, (-1*turn + 2) )
-
   	else
   		5
   	end
@@ -59,6 +66,6 @@ class Logic
 
   def clear
   	@move_count = 0
-  	@logic_grid = [0, 0, 0, 0, 0, 0, 0, 0]
+  	defineLogicGrid
   end
 end
