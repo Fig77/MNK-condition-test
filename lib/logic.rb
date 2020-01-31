@@ -33,7 +33,6 @@ class Logic
 	end
 
 	def checkVerticalHorizontal(t)
-
 		@logic_grid[@row] += t
 		@logic_grid[@column] += t
 		return 3 if @logic_grid[@row].abs == @k || @logic_grid[@column].abs == @k
@@ -42,15 +41,14 @@ class Logic
 	end
 
 	def gameCondition(input, t) # t will add or substract from @logical_grid depending on player.
-		
 		getColumnRow(input)
 		diagonalCheck = checkDiagonal(t)
+		verticalHorizontal = checkVerticalHorizontal(t)
 		@move_count += 1
 		return diagonalCheck unless diagonalCheck == 2
-		verticalHorizontal = checkVerticalHorizontal(t)
 		return verticalHorizontal unless verticalHorizontal == 2
-		
 		return 0 if @move_count == @k * @k
+
 		2
 	end
 

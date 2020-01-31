@@ -4,7 +4,6 @@ require_relative 'board'
 class Game  # Due to the simplicity of the project all game scenes will be managed from this class
   def initialize(player_one = "Player one", player_two = "Player two")
       @players = [player_one, "| X | ", player_two, "| O | ", false]
-      @current_k = 3
       @turn = 1
       @turn_changer = 2
       @game_state = 3
@@ -46,7 +45,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
           @players[2] = gets.chomp
           puts "Change board size"
           aux = gets.chomp.to_i
-          @logicAuxiliar.k, @current_k = aux, aux 
+          @logicAuxiliar.k = aux
         when 4
           puts ""
           @game_strings[1...4].each do |x| puts x end
@@ -100,7 +99,6 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
 
   def clear
     @game_state = 3
-    @board.m, @board.n = @current_k, @current_k 
     @board.clear
     @logicAuxiliar.clear
     @turn = 1
