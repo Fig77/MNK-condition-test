@@ -2,7 +2,7 @@ class Logic
   attr_writer :k, :board
 
 	def initialize(k = 3)
-		@row = 0 # Represents row of current input.
+		@row = 0 # Represents row of current input. 
 		@column = 0 # Represents column of current input.
 		@move_count = 0 # Cheks if it's a tie.
 		@k = k
@@ -21,13 +21,13 @@ class Logic
 
 	def checkDiagonal(t)
 		if @row == @column - @k
-			@logic_grid[19] += t
+			@logic_grid[@logic_grid.size - 1] += t
 		end
-		if ((@row - (@column - @k)).abs == 2 || @row + @column == 5 )
-			@logic_grid[20] += t
+		if ((@row - (@column - @k)).abs == @k - 1 || @row + @column == @k + (@k - 1) )
+			@logic_grid[@logic_grid.size - 2] += t
 		end
-	  return 3 if @logic_grid[19].abs == @k
-	  return 3 if @logic_grid[20].abs == @k
+	  return 3 if @logic_grid[@logic_grid.size - 1].abs == @k
+	  return 3 if @logic_grid[@logic_grid.size - 2].abs == @k
 
 	  2
 	end
@@ -37,6 +37,7 @@ class Logic
 		@logic_grid[@row] += t
 		@logic_grid[@column] += t
 		return 3 if @logic_grid[@row].abs == @k || @logic_grid[@column].abs == @k
+
 		2
 	end
 
@@ -54,13 +55,10 @@ class Logic
 	end
 
 	def manage_input(input, turn, taken)
-		if taken == "| X | " || taken == "| O | " || input.length > 3 || !input.to_i.between?(0, (@k*@k))
+		if taken == "| X | " || taken == "| O | " || input.length > 3 || !input.to_i.between?(1, (@k*@k))
 			return 4
     end
-		unless input.to_i == 0
   	  return gameCondition(input.to_i, (-1*turn + 2) )
-  	else
-  		5
   	end
 	end
 
