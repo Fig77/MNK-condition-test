@@ -55,13 +55,10 @@ class Logic
 	end
 
 	def manage_input(input, turn, taken)
-		if taken == "| X | " || taken == "| O | " || input.length > 3 || !input.to_i.between?(0, (@k*@k))
+		if taken == "| X | " || taken == "| O | " || input.length > 3 || !input.to_i.between?(1, (@k*@k))
 			return 4
     end
-		unless input.to_i == 0
   	  return gameCondition(input.to_i, (-1*turn + 2) )
-  	else
-  		5
   	end
 	end
 
