@@ -71,6 +71,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       @board.draw
       input = gets.chomp
       shallYou if input.length > 3
+      (run) if input == "-1"
       @game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
       case @game_state
         when 1, 2

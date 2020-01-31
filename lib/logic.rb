@@ -21,13 +21,13 @@ class Logic
 
 	def checkDiagonal(t)
 		if @row == @column - @k
-			@logic_grid[@logic_grid.size - 2] += t
-		end
-		if ((@row - (@column - @k)).abs == 2 || @row + @column == 5 )
 			@logic_grid[@logic_grid.size - 1] += t
 		end
-	  return 3 if @logic_grid[@logic_grid.size - 2].abs == @k
+		if ((@row - (@column - @k)).abs == @k - 1 || @row + @column == @k + (@k - 1) )
+			@logic_grid[@logic_grid.size - 2] += t
+		end
 	  return 3 if @logic_grid[@logic_grid.size - 1].abs == @k
+	  return 3 if @logic_grid[@logic_grid.size - 2].abs == @k
 
 	  2
 	end
@@ -37,6 +37,7 @@ class Logic
 		@logic_grid[@row] += t
 		@logic_grid[@column] += t
 		return 3 if @logic_grid[@row].abs == @k || @logic_grid[@column].abs == @k
+
 		2
 	end
 
