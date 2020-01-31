@@ -30,15 +30,13 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       shallYou if input.length > 3
       case input.to_i
         when 1
-          @players[4] = false
           clear
           startGame
         when 2
           unless @players[4] == false
             startGame
-          else
-            puts "There is no game to continue!"
           end
+            puts "There is no game to continue!"
         when 3
           puts @game_strings[0]
           @players[0] = gets.chomp
@@ -70,7 +68,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
       @board.draw
       input = gets.chomp
       shallYou if input.length > 3
-      (run) if input == "-1"
+      break if input == "-1"
       @game_state = @logicAuxiliar.manage_input(input, @turn, @board.grid[input.to_i - 1])
       case @game_state
         when 1, 2
@@ -85,8 +83,8 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
        end
     end
 
-    @players[4] = true
-    if @game_state == 3
+  @players[4] = true
+  if @game_state == 3
       puts "\n #{@players[@turn - 1]} has won!"
       clear
     elsif @game_state == 0

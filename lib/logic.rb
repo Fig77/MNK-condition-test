@@ -14,6 +14,25 @@ class Logic
 		((@k*@k) + 2).times { |x| @logic_grid.push(0) }
 	end
 
+	def manage_input(input, turn, taken)
+		if taken == "| X | " || taken == "| O | " || input.length > 3 || !input.to_i.between?(1, (@k*@k))
+			return 4
+    end
+  	  return gameCondition(input.to_i, (-1*turn + 2) )
+	end
+
+	def gameCondition(input, t) # t will add or substract from @logical_grid depending on player.
+		getColumnRow(input)
+		diagonalCheck = checkDiagonal(t)
+		verticalHorizontal = checkVerticalHorizontal(t)
+		@move_count += 1
+		return diagonalCheck unless diagonalCheck == 2
+		return verticalHorizontal unless verticalHorizontal == 2
+		return 0 if @move_count == @k * @k
+
+		2
+	end
+
 	def getColumnRow(input)
 		@column = ( (input - 1) % @k) + @k
 		@row = ( (input - 1) / @k)
@@ -38,26 +57,6 @@ class Logic
 		return 3 if @logic_grid[@row].abs == @k || @logic_grid[@column].abs == @k
 
 		2
-	end
-
-	def gameCondition(input, t) # t will add or substract from @logical_grid depending on player.
-		getColumnRow(input)
-		diagonalCheck = checkDiagonal(t)
-		verticalHorizontal = checkVerticalHorizontal(t)
-		@move_count += 1
-		return diagonalCheck unless diagonalCheck == 2
-		return verticalHorizontal unless verticalHorizontal == 2
-		return 0 if @move_count == @k * @k
-
-		2
-	end
-
-	def manage_input(input, turn, taken)
-		if taken == "| X | " || taken == "| O | " || input.length > 3 || !input.to_i.between?(1, (@k*@k))
-			return 4
-    end
-  	  return gameCondition(input.to_i, (-1*turn + 2) )
-  	end
 	end
 
   def clear
