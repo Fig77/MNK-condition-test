@@ -2,7 +2,7 @@ class Logic
   attr_writer :k, :board
 
 	def initialize(k = 3)
-		@row = 0 # Represents row of current input.
+		@row = 0 # Represents row of current input. 
 		@column = 0 # Represents column of current input.
 		@move_count = 0 # Cheks if it's a tie.
 		@k = k
@@ -21,13 +21,13 @@ class Logic
 
 	def checkDiagonal(t)
 		if @row == @column - @k
-			@logic_grid[19] += t
+			@logic_grid[@logic_grid.size - 2] += t
 		end
 		if ((@row - (@column - @k)).abs == 2 || @row + @column == 5 )
-			@logic_grid[20] += t
+			@logic_grid[@logic_grid.size - 1] += t
 		end
-	  return 3 if @logic_grid[19].abs == @k
-	  return 3 if @logic_grid[20].abs == @k
+	  return 3 if @logic_grid[@logic_grid.size - 2].abs == @k
+	  return 3 if @logic_grid[@logic_grid.size - 1].abs == @k
 
 	  2
 	end

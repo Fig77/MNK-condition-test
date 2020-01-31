@@ -2,9 +2,9 @@ class Grid
 	attr_accessor :grid
 	attr_accessor :m, :n
 	def initialize(m = 3, n = 3)
-		@m = m
-		@n = n
-		@grid = []
+		@m = m #col
+		@n = n #rows
+		@grid = [] #grid for drawing
 		(@m*@n).times { @grid.push("| I | ") }
 	end
 	# Could be done in a single string, but will make a small generic M*M version here so I can gradually
