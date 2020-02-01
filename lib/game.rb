@@ -43,7 +43,7 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
           @players[2] = gets.chomp
           puts "Change board size"
           aux = gets.chomp.to_i
-          @logicAuxiliar.k = aux
+          @logicAuxiliar.k = aux if aux.to_i.between?(1, 999) 
         when 4
           puts ""
           @game_strings[1...4].each do |x| puts x end
@@ -86,9 +86,11 @@ class Game  # Due to the simplicity of the project all game scenes will be manag
   @players[4] = true
   if @game_state == 3
       puts "\n #{@players[@turn - 1]} has won!"
+      @board.draw
       clear
     elsif @game_state == 0
       puts "It's a tie!"
+      @board.draw
       clear
     end
     @game_state = 3

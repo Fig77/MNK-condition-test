@@ -15,7 +15,7 @@ class Logic
 	end
 
 	def manage_input(input, turn, taken)
-		if taken == "| X | " || taken == "| O | " || input.length > 3 || !input.to_i.between?(1, (@k*@k))
+		if taken != "| I | " || input.length > 3 || !input.to_i.between?(1, (@k*@k))
 			return 4
     end
   	  return gameCondition(input.to_i, (-1*turn + 2) )
@@ -41,12 +41,12 @@ class Logic
 	def checkDiagonal(t)
 		if @row == @column - @k
 			@logic_grid[@logic_grid.size - 1] += t
+			return 3 if @logic_grid[@logic_grid.size - 1].abs == @k
 		end
 		if ((@row - (@column - @k)).abs == @k - 1 || @row + @column == @k + (@k - 1) )
 			@logic_grid[@logic_grid.size - 2] += t
+			return 3 if @logic_grid[@logic_grid.size - 2].abs == @k
 		end
-	  return 3 if @logic_grid[@logic_grid.size - 1].abs == @k
-	  return 3 if @logic_grid[@logic_grid.size - 2].abs == @k
 
 	  2
 	end
