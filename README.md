@@ -1,5 +1,5 @@
 <p align="center">
-  <h2 align="center">MMK - continons algorith test</h2>
+  <h2 align="center">MMK conditions algorithm test</h2>
   <p align="center">
     <br />
     <a href="https://github.com/Fig77/MNK-condition-test/"><strong>Explore the docs »</strong></a>
@@ -38,4 +38,4 @@ This project was built using Ruby.
 
 Facundo Iglesias - [Github profile](https://github.com/Fig77)
 
-Project Link: [Project repo](https://github.com/Fig77/new-repo-js/)
+Email: <strong>fig.igle@gmail.com</strong>
