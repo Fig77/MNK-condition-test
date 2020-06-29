@@ -18,7 +18,7 @@
 
 ### About The Project
 
-Project consist in algorithm practice for generating and checking conditions on a MMK board on constant time.
+The project consists of an algorithm practice for generating and checking conditions on an MMK board on constant time.
 
 ### Built With
 
@@ -28,7 +28,7 @@ This project was built using Ruby.
  The development environment uses `Ruby`, hence install ruby before proceeding.
   - Mac OS - `brew install ruby`
   - Linux - `sudo apt-get install ruby-full`
-  - windows - Download RubyInstaller [here](https://rubyinstaller.org/), run it, and you are done!
+  - windows - Download Ruby Installer [here](https://rubyinstaller.org/), run it, and you are done!
   
 ## Installation and set-up
 1. You can download the zip project clicking [here](https://github.com/Fig77/MNK-condition-test/archive.developer.zip) or you can clone the project using the command - git clone <https://github.com/Fig77/MNK-condition-test.git> 
